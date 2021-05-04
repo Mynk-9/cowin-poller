@@ -77,3 +77,4 @@ typings/
 
 # project specific
 errorLog.txt
+config.json

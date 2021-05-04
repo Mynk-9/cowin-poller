@@ -29,10 +29,12 @@ module.exports = {
     inputConfig: async () => {
         let config = {
             'stateId': null,
-            'districts': new Set(),
-            'pincodes': new Set(),
+            'districts': [],
+            'pincodes': [],
             'pollingInterval': []
         };
+        let _districts = new Set();
+        let _pincodes = new Set();
         console.info('No configuration was found.');
 
         // select state ///////////////////////////////////
@@ -49,7 +51,7 @@ module.exports = {
             while (true) {
                 stateId = readlineSync.questionInt('Enter the state code: ');
                 if (stateId === -1)
-                    return false;
+                    return null;
                 else if (stateId > states.length || stateId < 1)
                     console.log('Please enter correct value.');
                 else
@@ -69,7 +71,7 @@ module.exports = {
             const inputDistrict = async () => {
                 console.table(districtsTable);
                 let districtId = readlineSync.questionInt('Enter the district code: ');
-                config.districts.add(districtId);
+                _districts.add(districtId);
             };
             const inputPincode = async () => {
                 let pincode = 0;
@@ -78,7 +80,7 @@ module.exports = {
                     if (String(pincode).length === 6) break;
                     console.log('Please enter valid pincode.');
                 }
-                config.pincodes.add(pincode);
+                _pincodes.add(pincode);
             };
             console.log('Search by district or pincode?');
             while (true) {
@@ -94,11 +96,14 @@ module.exports = {
                         break;
                 }
 
-                if (!readlineSync.keyInYN('Select more district(s)/pincode(s)? '))
+                if (!readlineSync.keyInYNStrict('Select more district(s)/pincode(s)? '))
                     break;
             }
             if (config.districts.size === 0 && config.pincodes.size === 0)
-                return false;
+                return null;
+
+            config.districts = [..._districts];
+            config.pincodes = [..._pincodes];
         }
 
         // set polling interval ///////////////////////////
@@ -112,9 +117,9 @@ module.exports = {
                 let _metrics = inp.split(':');
                 for (let i = 0; i < 3; ++i) metrics[i] = parseInt(_metrics[i]);
                 if (
-                    (metrics[0] > 0 && metrics[0] < 24)
-                    && (metrics[1] > 0 && metrics[1] < 60)
-                    && (metrics[2] > 0 && metrics[2] < 60)
+                    (metrics[0] >= 0 && metrics[0] < 24)
+                    && (metrics[1] >= 0 && metrics[1] < 60)
+                    && (metrics[2] >= 0 && metrics[2] < 60)
                     && (metrics[0] || metrics[1] || metrics[2]) // at least one non-zero
                 )
                     break;
