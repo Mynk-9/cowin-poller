@@ -36,6 +36,7 @@ module.exports = {
             'stateId': null,
             'districts': [],
             'pincodes': [],
+            'age': 0,
             'pollingInterval': []
         };
         let _districts = new Set();
@@ -109,6 +110,11 @@ module.exports = {
 
             config.districts = [..._districts];
             config.pincodes = [..._pincodes];
+        }
+
+        // set age ////////////////////////////////////////
+        {
+            config.age = readlineSync.questionInt('Please enter your age: ');
         }
 
         // set polling interval ///////////////////////////
