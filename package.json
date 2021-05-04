@@ -1,0 +1,17 @@
+{
+  "name": "cowin-poller",
+  "version": "1.0.0",
+  "description": "Poll CoWin APIs to check if vaccines available",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js",
+    "start": "node app.js"
+  },
+  "author": "Mayank Mathur",
+  "license": "ISC"
+}
