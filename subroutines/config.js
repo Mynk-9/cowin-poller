@@ -21,7 +21,12 @@ module.exports = {
     // save config
     saveConfig: (config) => {
         let error = null;
-        fs.writeFile(configFile, config, err => error = err);
+        try {
+            fs.writeFileSync(configFile, config);
+        } catch (err) {
+            error = err;
+        }
+
         return error;
     },
 
