@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "axios": "^0.21.1",
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "sound-play": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
