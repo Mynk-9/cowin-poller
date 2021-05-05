@@ -2,7 +2,7 @@
 Poll cowin APIs to check if vaccines are now available.
 
 # How to use?   
-- Install Node.js (if not installed)  
+- Install Node.js [(if not installed)](https://nodejs.org/en/download/)  
 - Clone the repo or, download the code.
 - Open terminal/command prompt in the folder.
 - Run the command: ``npm start``
