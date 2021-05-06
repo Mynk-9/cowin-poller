@@ -16,7 +16,12 @@ module.exports = {
             await axios.get(`${api}/v2/admin/location/states`)
                 .then(resp => data = resp.data.states)
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
@@ -27,7 +32,12 @@ module.exports = {
             await axios.get(`${api}/v2/admin/location/districts/${stateId}`)
                 .then(resp => data = resp.data.districts)
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
@@ -47,7 +57,12 @@ module.exports = {
             await axios.get(`${api}/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${date}`)
                 .then(resp => data = resp.data.districts)
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
@@ -59,7 +74,12 @@ module.exports = {
             await axios.get(`${api}/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${date}`)
                 .then(resp => data = resp.data.sessions)
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
@@ -74,7 +94,12 @@ module.exports = {
             await axios.get(`${api}/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${date}`)
                 .then(resp => data = resp.data.centers)
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
