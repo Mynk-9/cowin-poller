@@ -84,9 +84,16 @@ module.exports = {
             const date = nowDate();
             let data = null;
             await axios.get(`${api}/v2/appointment/sessions/public/calendarByDistrict?district_id=${districtCode}&date=${date}`)
-                .then(resp => data = resp.data.centers)
+                .then(resp => {
+                    data = resp.data.centers;
+                })
                 .catch(err => {
-                    errorLogger.log(err);
+                    if (err.status !== 200) {
+                        console.info('Error fetching data from server. Probable causes could be poor internet connection or heavy traffic on the covin servers.');
+                    } else {
+                        errorLogger.log(err);
+                    }
+                    data = [];
                 });
             return data;
         },
